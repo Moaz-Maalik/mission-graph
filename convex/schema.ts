@@ -1,5 +1,5 @@
-import { defineSchema, defineTable } from "convex/server";
-import { v } from "convex/values";
+import { defineSchema, defineTable } from 'convex/server'
+import { v } from 'convex/values'
 
 export default defineSchema({
   componentTypes: defineTable({
@@ -15,7 +15,7 @@ export default defineSchema({
     allowedOutgoing: v.array(v.string()),
 
     ui: v.optional(v.any()),
-  }).index("by_typeId", ["typeId"]),
+  }).index('by_typeId', ['typeId']),
 
   components: defineTable({
     label: v.string(),
@@ -31,12 +31,12 @@ export default defineSchema({
   }),
 
   relationships: defineTable({
-    fromComponentId: v.id("components"),
-    toComponentId: v.id("components"),
+    fromComponentId: v.id('components'),
+    toComponentId: v.id('components'),
     type: v.string(),
     createdAt: v.number(),
   })
-    .index("by_from", ["fromComponentId"])
-    .index("by_to", ["toComponentId"])
-    .index("by_type", ["type"]),
-});
+    .index('by_from', ['fromComponentId'])
+    .index('by_to', ['toComponentId'])
+    .index('by_type', ['type']),
+})

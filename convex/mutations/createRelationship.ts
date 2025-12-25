@@ -1,11 +1,11 @@
 import { mutation } from '../_generated/server'
-import { v } from "convex/values";
-import { validateRelationship } from "../logic/validateRelationship";
+import { v } from 'convex/values'
+import { validateRelationship } from '../logic/validateRelationship'
 
 export default mutation({
   args: {
-    fromComponentId: v.id("components"),
-    toComponentId: v.id("components"),
+    fromComponentId: v.id('components'),
+    toComponentId: v.id('components'),
     type: v.string(),
   },
   async handler(ctx, args) {
@@ -13,14 +13,14 @@ export default mutation({
       ctx,
       args.fromComponentId,
       args.toComponentId,
-      args.type
-    );
+      args.type,
+    )
 
-    await ctx.db.insert("relationships", {
+    await ctx.db.insert('relationships', {
       fromComponentId: args.fromComponentId,
       toComponentId: args.toComponentId,
       type: args.type,
       createdAt: Date.now(),
-    });
+    })
   },
-});
+})

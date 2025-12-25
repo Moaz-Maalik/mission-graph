@@ -5,15 +5,15 @@ import {
   Node,
   Edge,
   ReactFlowProvider,
-} from "reactflow";
-import "reactflow/dist/style.css";
-import { SubflowGraphResult } from "@/types/subflow";
+} from 'reactflow'
+import 'reactflow/dist/style.css'
+import { SubflowGraphResult } from '@/types/subflow'
 
 type Props = {
-  title: string;
-  result: SubflowGraphResult;
-  onClose: () => void;
-};
+  title: string
+  result: SubflowGraphResult
+  onClose: () => void
+}
 
 export function SubflowModal({ title, result, onClose }: Props) {
   const nodes: Node[] = result.nodes.map((n, index) => ({
@@ -23,14 +23,14 @@ export function SubflowModal({ title, result, onClose }: Props) {
       x: 100 + index * 200,
       y: 200,
     },
-  }));
+  }))
 
   const edges: Edge[] = result.edges.map((e) => ({
     id: `${e.from}-${e.to}-${e.type}`,
     source: e.from,
     target: e.to,
     label: e.type,
-  }));
+  }))
 
   return (
     <div className="fixed inset-0 z-[2000] flex items-center justify-center bg-black/40">
@@ -41,7 +41,6 @@ export function SubflowModal({ title, result, onClose }: Props) {
         </div>
 
         <div className="flex-1">
-          {/* 👇 ISOLATED STORE */}
           <ReactFlowProvider>
             <ReactFlow nodes={nodes} edges={edges} fitView>
               <Background />
@@ -51,5 +50,5 @@ export function SubflowModal({ title, result, onClose }: Props) {
         </div>
       </div>
     </div>
-  );
+  )
 }

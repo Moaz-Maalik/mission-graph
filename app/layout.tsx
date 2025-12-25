@@ -1,13 +1,11 @@
-import "./globals.css";
-import { Providers } from "./providers";
+import './globals.css'
+import { Providers } from './providers'
 // import "reactflow/dist/style.css";
-
-
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html>
@@ -15,5 +13,5 @@ export default function RootLayout({
         <Providers>{children}</Providers>
       </body>
     </html>
-  );
+  )
 }

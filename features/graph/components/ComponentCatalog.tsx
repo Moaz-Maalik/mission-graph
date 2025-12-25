@@ -1,12 +1,12 @@
-"use client";
+'use client'
 
-import { useQuery } from "convex/react";
-import { api } from "@/convex/_generated/api";
+import { useQuery } from 'convex/react'
+import { api } from '@/convex/_generated/api'
 
 export function ComponentCatalog() {
-  const types = useQuery(api.queries.getComponentTypes.default);
+  const types = useQuery(api.queries.getComponentTypes.default)
 
-  if (!types) return null;
+  if (!types) return null
 
   return (
     <div className="w-64 border-r bg-white p-3 space-y-2">
@@ -20,10 +20,10 @@ export function ComponentCatalog() {
           draggable
           onDragStart={(e) => {
             e.dataTransfer.setData(
-              "application/reactflow",
-              JSON.stringify({ typeId: type.typeId })
-            );
-            e.dataTransfer.effectAllowed = "move";
+              'application/reactflow',
+              JSON.stringify({ typeId: type.typeId }),
+            )
+            e.dataTransfer.effectAllowed = 'move'
           }}
           className="
             cursor-grab rounded-md border
@@ -35,5 +35,5 @@ export function ComponentCatalog() {
         </div>
       ))}
     </div>
-  );
+  )
 }

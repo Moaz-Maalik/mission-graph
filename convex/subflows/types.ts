@@ -1,12 +1,12 @@
 export type GraphSubflowResult = {
   nodes: {
-    id: string;
-    label: string;
-    typeId: string;
-  }[];
+    id: string
+    label: string
+    typeId: string
+  }[]
   edges: {
-    from: string;
-    to: string;
-    type: string;
-  }[];
-};
+    from: string
+    to: string
+    type: string
+  }[]
+}

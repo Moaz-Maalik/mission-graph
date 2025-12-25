@@ -1,31 +1,31 @@
-"use client";
+'use client'
 
-import { createContext, useContext } from "react";
-import { useGraphSubflow } from "@/hooks/useGraphSubflow";
+import { createContext, useContext } from 'react'
+import { useGraphSubflow } from '@/hooks/useGraphSubflow'
 
 const GraphSubflowContext = createContext<ReturnType<
   typeof useGraphSubflow
-> | null>(null);
+> | null>(null)
 
 export function GraphSubflowProvider({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
-  const value = useGraphSubflow();
+  const value = useGraphSubflow()
   return (
     <GraphSubflowContext.Provider value={value}>
       {children}
     </GraphSubflowContext.Provider>
-  );
+  )
 }
 
 export function useGraphSubflowContext() {
-  const ctx = useContext(GraphSubflowContext);
+  const ctx = useContext(GraphSubflowContext)
   if (!ctx) {
     throw new Error(
-      "useGraphSubflowContext must be used within GraphSubflowProvider"
-    );
+      'useGraphSubflowContext must be used within GraphSubflowProvider',
+    )
   }
-  return ctx;
+  return ctx
 }

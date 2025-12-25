@@ -1,5 +1,5 @@
-import { query } from "../_generated/server";
+import { query } from '../_generated/server'
 
 export default query(async (ctx) => {
-  return await ctx.db.query("componentTypes").collect();
-});
+  return await ctx.db.query('componentTypes').collect()
+})
