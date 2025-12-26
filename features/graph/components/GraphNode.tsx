@@ -19,22 +19,29 @@ function GraphNode({ data }: NodeProps<GraphNodeData>) {
 
   const isEditable = data.capabilities?.includes('editable')
 
+  // Helper to prevent React Flow's drag/selection logic from firing on buttons/inputs
+  const preventNodeInteraction = (e: React.MouseEvent) => {
+    e.stopPropagation()
+  }
+
   return (
     <div
-      className={`
-        relative rounded-lg  bg-white px-4 py-3
-      `}
+      className={`relative rounded-lg bg-white px-4 py-3  ${
+        editing ? 'nodrag' : ''
+      }`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       {hovered && (
         <div
           className="absolute -top-3 right-1 flex gap-1 rounded bg-white p-1 shadow"
-          onMouseDown={(e) => e.stopPropagation()}
+          onMouseDown={preventNodeInteraction}
         >
           {data.subflows?.length ? (
             <button
+              type="button"
               className="rounded p-1 hover:bg-gray-100"
+              onMouseDown={preventNodeInteraction}
               onClick={(e) => {
                 e.stopPropagation()
                 openSubflowMenu({
@@ -49,7 +56,9 @@ function GraphNode({ data }: NodeProps<GraphNodeData>) {
 
           {isEditable && (
             <button
+              type="button"
               className="rounded p-1 hover:bg-gray-100"
+              onMouseDown={preventNodeInteraction}
               onClick={(e) => {
                 e.stopPropagation()
                 setEditing(true)
@@ -60,6 +69,7 @@ function GraphNode({ data }: NodeProps<GraphNodeData>) {
           )}
         </div>
       )}
+
       <div className="text-center">
         <div className="text-xs text-gray-500">{data.label}</div>
 
@@ -70,6 +80,7 @@ function GraphNode({ data }: NodeProps<GraphNodeData>) {
             className="mt-1 w-full rounded border px-1 text-sm"
             value={value}
             onChange={(e) => setValue(Number(e.target.value))}
+            onMouseDown={preventNodeInteraction}
             onBlur={async () => {
               await updateValue({
                 componentId: data.componentId as Id<'components'>,
@@ -90,7 +101,6 @@ function GraphNode({ data }: NodeProps<GraphNodeData>) {
                 setValue(data.value ?? '')
               }
             }}
-            onMouseDown={(e) => e.stopPropagation()}
           />
         ) : (
           <div className="mt-1 text-sm font-medium">{data.value ?? ''}</div>
